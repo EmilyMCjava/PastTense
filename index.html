@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Tense</title>
+    <style>
+        body {
+            text-align: center;
+            background: radial-gradient(circle, #0077ff, #130057);
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            color: black;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2em;
+            text-shadow: 2px 2px 4px #414141;
+        }
+
+        button {
+            color: white;
+            background-color: #333333;
+            border: 2px solid #999999;
+            border-radius: 4px;
+            padding: 0.5em;
+            margin: 0.5em;
+            cursor: pointer;
+            height: fit-content;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .glass-container {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            color: #fff;
+        }
+
+        #downloads {
+            text-align: center;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+        }
+
+        .column1, .column2, .column3 {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            background-size: 300px 125px;
+            background-repeat: no-repeat;
+            background-position: fixed;
+        }
+
+        .column1 {
+            background-image: url(/media/windows.jpg);
+        }
+
+        .column2 {
+            background-image: url(/media/mac.jpg);
+        }
+
+        .column3 {
+            background-image: url(/media/linux.jpg);
+        }
+    </style>
+</head>
+<body>
+    <div class="container glass-container">
+        <img src="/media/Past.png" alt="Past Tense Logo" width="auto" height="auto">
+        <h1>Past Tense: Alter Reality</h1>
+
+        <div>
+            <h2>Downloads</h2>
+            <div class="row">
+                <div class="column1">
+                    <h3>Windows</h3>
+                    <button id="windownload">Download (Unavailable)</button>
+                </div>
+                <div class="column2">
+                    <h3>Mac</h3>
+                    <button id="macdownload">Download (Unavailable)</button>
+                </div>
+                <div class="column3">
+                    <h3>Linux</h3>
+                    <button id="lindownload">Download (Unavailable)</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="abtsection">
+            <h2>What Is The Game Supposed To Be?</h2>
+            <p>Game Info Coming Soon...</p>
+        </div>
+
+        <div>
+            <h2>Roadmap</h2>
+            <p>Roadmap Coming Soon...</p>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="suzume-audio" preload="auto" style="display:none;">
+        <source src="/media/Suzume-Piano-Theme-Calm.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Game state
+        let gameState = {
+            isPlaying: false
+        };
+
+        // Function to play the Suzume song
+        function playSuzume() {
+            const audio = document.getElementById("suzume-audio");
+            if (!audio) {
+                console.log("Audio element not found.");
+                return;
+            }
+            if (gameState.isPlaying) {
+                console.log("The song is already playing.");
+                return;
+            }
+
+            audio.play();
+            gameState.isPlaying = true;
+            console.log("Now playing: Suzume Piano Theme Calm");
+
+            audio.onended = function() {
+                gameState.isPlaying = false;
+                console.log("The song has ended.");
+            };
+        }
+
+        // Function to stop the Suzume song
+        function stopSuzume() {
+            const audio = document.getElementById("suzume-audio");
+            if (audio && gameState.isPlaying) {
+                audio.pause();
+                audio.currentTime = 0; // Reset the audio position to the start
+                gameState.isPlaying = false;
+                console.log("Stopped playing Suzume.");
+            } else {
+                console.log("The song is not playing.");
+            }
+        }
+
+        // Expose Secret.Play to the console
+        const Secret = {
+            Play: function(isPlay) {
+                if (isPlay) {
+                    playSuzume();
+                } else {
+                    stopSuzume();
+                }
+            }
+        };
+
+        window.Secret = Secret;
+
+        // Download links
+        document.getElementById('windownload').addEventListener('click', function() {
+            window.location.href = "https://www.dropbox.com/s/w79261g80o38j0u/Past%20Tense%20(website).zip?dl=0";
+        });
+        document.getElementById('macdownload').addEventListener('click', function() {
+            window.location.href = "https://www.dropbox.com/s/w79261g80o38j0u/Past%20Tense%20(website).dmg?dl=0";
+        });
+        document.getElementById('lindownload').addEventListener('click', function() {
+            window.location.href = "https://www.dropbox.com/s/w79261g80o38j0u/Past%20Tense%20(website).appimage?dl=0";
+        });
+    </script>
+</body>
+</html>
+<!--Secret.Play(true/false); -->
